@@ -3,7 +3,7 @@
 
   <div cdkDropList cdkDropListOrientation="horizontal" class="all-group-container" (cdkDropListDropped)="dropGroup($event)">
 
-    <div class="single-group-container" *ngFor="let group of todoGroup" cdkDrag>
+    <div class="single-group-container"  [cdkDragData]="group" *ngFor="let group of todoGroup" cdkDrag>
 
       <div  class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="0px" fxLayoutGap.xs="0">
       <div class="todoItem-info"  (click)="updateListName(group.id)" fxFlex="90%">        
@@ -21,8 +21,8 @@
   
 
       <div class="item item-2" fxFlex="10%">
-        <button  *ngIf="editListNameId != group.id" mat-icon-button (click)="editListName(group.id)">
-          <mat-icon>create</mat-icon>
+        <button  *ngIf="editListNameId != group.id" mat-icon-button (click)="openGroupDialog(group.id)">
+          <mat-icon>more_vert</mat-icon>
         </button>
           <button   (click)="saveListName(group.id)" *ngIf="editListNameId == group.id" mat-icon-button (click)="saveListName(group.id)">
           <mat-icon>save</mat-icon>
@@ -37,11 +37,11 @@
         id="{{group.classId}}" (cdkDropListDropped)="drop($event)">
 
         <!-- to do items -->
-        <div class="list-item" *ngFor="let todoItem of group.todos" cdkDrag (dblclick)="openDialog(todoItem)">
+        <div class="list-item" [cdkDragData]="todoItem.id"  *ngFor="let todoItem of group.todos" cdkDrag (dblclick)="openDialog(todoItem)">
           <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
             fxLayoutGap.xs="0">
             <div class="todoItem-info" fxFlex="95%">
-              <mat-checkbox class="checklist-leaf-node"> {{todoItem.item}} </mat-checkbox>
+              <mat-checkbox class="checklist-leaf-node" [(ngModel)]="todoItem.completed" [ngClass]="{'completed': todoItem.completed}" > {{todoItem.item}} </mat-checkbox>
             </div>
             <div class="item item-2" fxFlex="5%" fxFlexOrder="3">
               <mat-icon aria-hidden="false" (click)="deleteItem(group.id, todoItem.id)">clear</mat-icon>

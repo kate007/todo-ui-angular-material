@@ -1,0 +1,29 @@
+
+
+<div class="container">
+  <h2 mat-dialog-title *ngIf="!showDeleteConfirmMsg">
+      <mat-label>List</mat-label>
+      <mat-form-field class="example-full-width">            
+          <input matInput  [(ngModel)]="data.name">
+        </mat-form-field> 
+  </h2>
+
+  <mat-dialog-content>
+
+ <mat-dialog-actions *ngIf="showDeleteConfirmMsg">
+  <p> Are you sure you want to delete this list and all it's contents?</p>
+  <button class="mat-raised-button" (click)="delete()" >Yes</button> <button class="mat-raised-button"  (click)="deleteCnacelled()">No</button>
+ </mat-dialog-actions>
+
+ <mat-dialog-actions *ngIf="!showDeleteConfirmMsg">
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button class="mat-raised-button" (click)="deleteConfirmed()">Delete This List</button>
+</mat-dialog-actions>
+
+
+</mat-dialog-content>
+
+
+  
+
+</div>

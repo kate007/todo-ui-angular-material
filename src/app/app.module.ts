@@ -10,13 +10,16 @@ import { TodoGroupComponent } from './todo-group/todo-group.component';
 import { DialogComponent } from './todo-group/dialog/dialog.component';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { TodoGroupDialogComponent } from './todo-group/todo-group-dialog/todo-group-dialog.component';
+import { TodoService } from './todo-group/service/todo.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoGroupComponent,
-    DialogComponent
+    DialogComponent,
+    TodoGroupDialogComponent
 
   ],
   imports: [
@@ -28,8 +31,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     FlexLayoutModule
   
   ],
-  providers: [],
-  entryComponents:[DialogComponent],
+  providers: [TodoService],
+  entryComponents:[DialogComponent, TodoGroupDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
+import { TodoService } from './service/todo.service';
+import { TodoGroupDialogComponent } from './todo-group-dialog/todo-group-dialog.component';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class TodoGroupComponent {
   addGroupIndex: number = 5; //gives unique id to group item added
   editListNameId: number = 0; //used to track the list name being updated
 
-  constructor(public dialog: MatDialog) { 
+  constructor(public dialog: MatDialog, private todoService: TodoService ) { 
   
     this.todoGroup = [
       {
@@ -26,11 +28,11 @@ export class TodoGroupComponent {
         classId: 'grp1', 
         name: 'School',
         todos:[
-          { id: 1, item:  'Do math assignment'},
-          { id: 2, item:  'Pass English Paper'},
-          { id: 3, item:  'Research social studies homework'},
-          { id: 4, item:  'Do group project'},
-          { id: 5, item:  'Research english paper'},
+          { id: 1, item:  'Do math assignment', completed: false},
+          { id: 2, item:  'Pass English Paper', completed: false},
+          { id: 3, item:  'Research social studies homework', completed: false},
+          { id: 4, item:  'Do group project', completed: false},
+          { id: 5, item:  'Research english paper', completed: false},
         ]
       },
       {
@@ -38,11 +40,11 @@ export class TodoGroupComponent {
         classId: 'grp2', 
         name: 'Chores',
         todos:[
-          { id: 6, item:  'Wash Dishes'},
-          { id: 7, item:  'Do Laundry'},
-          { id: 8, item:  'Walk the dog'},
-          { id: 9, item:  'Cook Lunch'},
-          { id: 10, item: 'Pay bill'},
+          { id: 6, item:  'Wash Dishes', completed: false},
+          { id: 7, item:  'Do Laundry', completed: false},
+          { id: 8, item:  'Walk the dog', completed: false},
+          { id: 9, item:  'Cook Lunch', completed: false},
+          { id: 10, item: 'Pay bill', completed: false},
         ]
       },
       {
@@ -50,18 +52,18 @@ export class TodoGroupComponent {
         classId: 'grp3', 
         name: 'Work',
         todos:[
-          { id: 11, item:  'Finish project 1'},
-          { id: 12, item:  'Read paper 1'},
-          { id: 13, item:  'Confirm appointment'},
-          { id: 14, item:  'Check email'},
-          { id: 15, item:  'Go to meeting'},
-          { id: 16, item:  'Milk cows'},
-          { id: 17, item:  'Get eggs'},
-          { id: 18, item:  'Feed horses'},
-          { id: 19, item:  'Buy feeds'},
-          { id: 20, item:  'Feed llamas'},
-          { id: 21, item:  'Feed llamas'},
-          { id: 22, item:  'Feed llamas'},
+          { id: 11, item:  'Finish project 1', completed: false},
+          { id: 12, item:  'Read paper 1', completed: false},
+          { id: 13, item:  'Confirm appointment', completed: false},
+          { id: 14, item:  'Check email', completed: false},
+          { id: 15, item:  'Go to meeting', completed: false},
+          { id: 16, item:  'Milk cows', completed: false},
+          { id: 17, item:  'Get eggs', completed: false},
+          { id: 18, item:  'Feed horses', completed: false},
+          { id: 19, item:  'Buy feeds', completed: false},
+          { id: 20, item:  'Feed llamas', completed: false},
+          { id: 21, item:  'Feed llamas', completed: false},
+          { id: 22, item:  'Feed llamas', completed: false},
 
         ]
       },  
@@ -71,7 +73,7 @@ export class TodoGroupComponent {
         name: 'Farm',
         todos:[       
         
-          { id: 23, item:  'Feed llamas'},
+          { id: 23, item:  'Feed llamas', completed: true},
         ]
       }
    
@@ -85,9 +87,7 @@ export class TodoGroupComponent {
   
   
   drop(event: CdkDragDrop<string[]>) {
-
-    console.log(event);
-    if (event.previousContainer === event.container) {
+    if (event.previousContainer === event.container) {   
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);      
     } else {
       transferArrayItem(event.previousContainer.data,
@@ -122,7 +122,7 @@ export class TodoGroupComponent {
      let newItemElement  = (document.getElementById('newItem-' + groupId) as HTMLInputElement); 
      this.addToGroupId = groupId;
      let group = this.todoGroup.find( x => x.id == groupId);
-     group.todos.push( { id: this.addItemIndex++ , item: newItemElement.value});
+     group.todos.push( { id: this.addItemIndex++ , item: newItemElement.value, completed: false});
      newItemElement.value = '';
   }
 
@@ -149,26 +149,25 @@ export class TodoGroupComponent {
       }
    
     );
+    let newGroup = this.todoGroup[ this.todoGroup.length-1];
     newListItemElement.value = '';
+    this.connectedTo.push(newGroup.classId);
   }
 
   editListName(id:number)
   {
     this.editListNameId = id;
   }
-
-  updateListName(groupId:number)
+  deleteListGroup(groupId:number)
   {
-   
-
-  
+    //delete from todoGroup and from connected
+    let groupIdIndex  = this.todoGroup.findIndex( x => x.id == groupId);  
+    let group = this.todoGroup[ groupIdIndex ];
+    let connectedIndex = this.connectedTo.findIndex( x => x == group.classId )
+    this.todoGroup.splice(groupIdIndex, 1);
+    this.connectedTo.splice(connectedIndex,1);    
     
   }
-  editListSettings(id:number)
-  {
-
-  }
-
   saveListName(groupId:number)
   {
     let group = this.todoGroup.find( x => x.id == groupId);  
@@ -177,4 +176,29 @@ export class TodoGroupComponent {
     this.editListNameId = 0;
 
   }
+
+  updateListGroups(deleteThisGroup:boolean, groupId:number)
+  {
+      if(deleteThisGroup)
+      {
+        this.deleteListGroup(groupId);
+      }
+  }
+openGroupDialog(groupId:number)
+  {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '50%';
+    dialogConfig.autoFocus = true;
+
+    let groupIdIndex = this.todoGroup.findIndex( x => x.id == groupId);
+
+    dialogConfig.data =  this.todoGroup[groupIdIndex];
+
+    let dialogRef = this.dialog.open( TodoGroupDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => this.updateListGroups(data, groupId)
+    );
+
+  } 
+
 }

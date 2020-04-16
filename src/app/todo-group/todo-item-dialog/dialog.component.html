@@ -1,0 +1,42 @@
+
+
+<div class="container">
+  <h2 mat-dialog-title>
+      <mat-label>To do</mat-label>
+      <mat-form-field class="example-full-width">            
+          <input matInput  [(ngModel)]="data.todo.item">
+        </mat-form-field>
+  </h2>
+
+  <mat-dialog-content>
+  
+ 
+ 
+  <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+
+
+  <mat-form-field class="example-full-width">
+      <mat-label>Due Date</mat-label>
+   
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    
+    </mat-form-field>
+
+    <!-- <button mat-stroked-button>Labels</button> -->
+  </mat-dialog-content>
+
+
+  
+  <mat-dialog-actions>
+      <button class="mat-raised-button" (click)="close()">Close</button>
+  </mat-dialog-actions>
+</div>
