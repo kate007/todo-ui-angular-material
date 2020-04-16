@@ -7,25 +7,16 @@
 
       <div  class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="0px" fxLayoutGap.xs="0">
       <div class="todoItem-info"  (click)="updateListName(group.id)" fxFlex="90%">        
-        <h2 *ngIf="editListNameId != group.id" (click)="updateListName(group.id)">{{group.name}}</h2>  
-        <input
-        *ngIf="editListNameId == group.id"
-        autofocus    
-        id="listName-{{group.id}}" 
-        value="{{group.name}}" 
-        style="height:85%;width:100%"
-       
-        > 
+        <h2  (click)="updateListName(group.id)">{{group.name}}</h2>  
+   
+      
         
       </div>
   
 
       <div class="item item-2" fxFlex="10%">
-        <button  *ngIf="editListNameId != group.id" mat-icon-button (click)="openGroupDialog(group.id)">
+        <button mat-icon-button (click)="openGroupDialog(group.id)">
           <mat-icon>more_vert</mat-icon>
-        </button>
-          <button   (click)="saveListName(group.id)" *ngIf="editListNameId == group.id" mat-icon-button (click)="saveListName(group.id)">
-          <mat-icon>save</mat-icon>
         </button>
       </div>
 
@@ -37,7 +28,7 @@
         id="{{group.classId}}" (cdkDropListDropped)="drop($event)">
 
         <!-- to do items -->
-        <div class="list-item" [cdkDragData]="todoItem.id"  *ngFor="let todoItem of group.todos" cdkDrag (dblclick)="openDialog(todoItem)">
+        <div class="list-item" [cdkDragData]="todoItem.id"  *ngFor="let todoItem of group.todos" cdkDrag (dblclick)="openDialog(todoItem, group.id)">
           <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
             fxLayoutGap.xs="0">
             <div class="todoItem-info" fxFlex="95%">
