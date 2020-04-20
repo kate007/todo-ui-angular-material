@@ -26,7 +26,7 @@
         <!-- to do items -->
         <div class="list-item" [cdkDragData]="todoItem.id" *ngFor="let todoItem of group.todos" cdkDrag
           (dblclick)="openDialog(todoItem, group.id)">
-          <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
+          <div class="container"  flex fxLayout="row" fxLayoutAlign="center" 
             fxLayoutGap.xs="0">
             <div class="todoItem-info" fxFlex="95%">
               <mat-checkbox class="checklist-leaf-node" [(ngModel)]="todoItem.completed"
@@ -40,7 +40,7 @@
         <!-- /to do items -->
 
         <!-- add todo -->
-        <div fxLayout fxLayout.xs="column" fxLayoutAlign="enter" fxLayoutGap="0px" fxLayoutGap.xs="0">
+        <div flex fxLayout="row" fxLayoutAlign="center" fxLayoutGap="0px">
           <div fxFlex="25%">
             <button mat-flat-button color="accent" style="width: 100%;" (click)="addTodoItem(group.id, $event)">
               <mat-icon aria-hidden="false">add</mat-icon>
@@ -56,19 +56,16 @@
     </div>
 
     <div class="single-group-container-add">
-      <div  flex fxLayout="row" fxLayoutAlign="center center">
-        <div fxFlex="20%">
-          <button mat-flat-button color="accent" (click)="addList()">
-            <mat-icon aria-hidden="false">add</mat-icon> List
+      <div  flex fxLayout="row" fxLayoutAlign="center"  fxLayoutGap="5px">
+        
+          <button mat-flat-button color="accent" fxFlex="20%" (click)="addList()">
+            <mat-icon aria-hidden="false">add</mat-icon>
           </button>
-        </div>
-        <div fxFlex="80%">
-          <input id="newListItem" autofocus placeholder="Enter a title for this list" (keyup.enter)="addList()">         
-        </div>
+       
+      
+          <input  fxFlex="80%" id="newListItem" autofocus placeholder="Enter a title for this list" (keyup.enter)="addList()">         
+     
       </div>
-
-
-
     </div>
 
   </div>

@@ -37,7 +37,7 @@ export class TodoService {
           { id: 7, item:  'Do Laundry', completed: false},
           { id: 8, item:  'Walk the dog', completed: false},
           { id: 9, item:  'Cook Lunch', completed: false},
-          { id: 10, item: 'Pay bill', completed: false},
+          { id: 10, item: 'Pay bills', completed: false},
         ]
       },
       {
@@ -45,19 +45,12 @@ export class TodoService {
         classId: 'grp3', 
         name: 'Work',
         todos:[
-          { id: 11, item:  'Finish project 1', completed: false},
-          { id: 12, item:  'Read paper 1', completed: false},
+          { id: 11, item:  'Finish project', completed: false},
+          { id: 12, item:  'Check work logs', completed: false},
           { id: 13, item:  'Confirm appointment', completed: false},
           { id: 14, item:  'Check email', completed: false},
           { id: 15, item:  'Go to meeting', completed: false},
-          { id: 16, item:  'Milk cows', completed: false},
-          { id: 17, item:  'Get eggs', completed: false},
-          { id: 18, item:  'Feed horses', completed: false},
-          { id: 19, item:  'Buy feeds', completed: false},
-          { id: 20, item:  'Feed llamas', completed: false},
-          { id: 21, item:  'Feed llamas', completed: false},
-          { id: 22, item:  'Feed llamas', completed: false},
-
+        
         ]
       },  
       {
@@ -65,8 +58,14 @@ export class TodoService {
         classId: 'grp4', 
         name: 'Farm',
         todos:[       
-        
-          { id: 23, item:  'Feed llamas', completed: true},
+          { id: 16, item:  'Milk cows', completed: false},
+          { id: 17, item:  'Get eggs', completed: false},
+          { id: 18, item:  'Feed horses', completed: false},
+          { id: 19, item:  'Buy feeds', completed: false},
+          { id: 20, item:  'Feed llamas', completed: false},
+          { id: 21, item:  'Feed chickens', completed: false},
+          { id: 22, item:  'Clean shed', completed: false},
+          { id: 23, item:  'Buy grains', completed: true},
         ]
       }
    
