@@ -1,3 +1,4 @@
+
 .container {  
   max-width: 100%;
   margin: 0 12px;
@@ -15,7 +16,7 @@
 }
 
 .list-item {
-  padding: 20px 10px;
+  padding: 10px 10px;
   border-bottom: solid 1px #ccc;
   box-sizing: border-box;
   cursor: move;
@@ -50,9 +51,7 @@
   opacity: 0;
 }
 
-.all-group-container {
-  width: 1000000px;
-  
+.all-group-container {  
 
   min-height: 200px;
   display: flex;
@@ -67,7 +66,7 @@
 
 .single-group-container {
   width: 300px;
-  padding: 20px 10px;
+  padding: 10px 10px;
   border-right: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
   background-color: whitesmoke;
@@ -93,7 +92,6 @@
 .list-container {
   margin-left: 15px;
   background-color: #00AECC;
- 
 }
 
 .todoItem-info {

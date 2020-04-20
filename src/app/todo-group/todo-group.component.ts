@@ -15,7 +15,9 @@ export class TodoGroupComponent {
   connectedTo = [];
   todoGroup = [];
   blankTodo =  { id: -1, item:  'blank'};
-
+  singleContainerWidth: number = 300;
+  groupContainerWidth = 0;
+ 
   constructor(public dialog: MatDialog, private todoService: TodoService ) { 
   
     this.todoService.initTodolist();
@@ -120,5 +122,17 @@ openGroupDialog(groupId:number)
    {
     this.todoGroup = this.todoService.getAllTodos();
     this.connectedTo = this.todoService.getConnectedTo();
+
+
+    let vw = this.getVW();
+    let addedCardsWidth = ( this.singleContainerWidth + 40 ) * (this.todoService.getGroupCount() + 1 );     
+    this.groupContainerWidth =   vw > addedCardsWidth ? vw : addedCardsWidth;
    }
+
+   getVW()
+   {
+     return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+   }
+
+
 }

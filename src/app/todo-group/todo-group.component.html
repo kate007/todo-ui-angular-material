@@ -1,38 +1,36 @@
+<mat-toolbar [style.width.px]="groupContainerWidth">To Do</mat-toolbar>
 <div class="list-container">
 
 
-  <div cdkDropList cdkDropListOrientation="horizontal" class="all-group-container" (cdkDropListDropped)="dropGroup($event)">
+  <div cdkDropList cdkDropListOrientation="horizontal" class="all-group-container" [style.width.px]="groupContainerWidth"
+    (cdkDropListDropped)="dropGroup($event)">
 
-    <div class="single-group-container"  [cdkDragData]="group" *ngFor="let group of todoGroup" cdkDrag>
+    <div class="single-group-container" [cdkDragData]="group" *ngFor="let group of todoGroup" cdkDrag>
 
-      <div  class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="0px" fxLayoutGap.xs="0">
-      <div class="todoItem-info"  (click)="updateListName(group.id)" fxFlex="90%">        
-        <h2  (click)="updateListName(group.id)">{{group.name}}</h2>  
-   
-      
-        
+      <div class="container" fxLayout fxLayout="row"  fxLayoutAlign="center center">
+        <div class="todoItem-info" (click)="updateListName(group.id)" fxFlex="90%">
+          <h2 (click)="updateListName(group.id)">{{group.name}}</h2>
+        </div>
+
+
+        <div class="item item-2" fxFlex="10%">
+          <button mat-icon-button (click)="openGroupDialog(group.id)">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
       </div>
-  
 
-      <div class="item item-2" fxFlex="10%">
-        <button mat-icon-button (click)="openGroupDialog(group.id)">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-      </div>
-
-     
-      
-      </div>
-    
       <div cdkDropList [cdkDropListData]="group.todos" [cdkDropListConnectedTo]="connectedTo" class="list"
         id="{{group.classId}}" (cdkDropListDropped)="drop($event)">
 
         <!-- to do items -->
-        <div class="list-item" [cdkDragData]="todoItem.id"  *ngFor="let todoItem of group.todos" cdkDrag (dblclick)="openDialog(todoItem, group.id)">
+        <div class="list-item" [cdkDragData]="todoItem.id" *ngFor="let todoItem of group.todos" cdkDrag
+          (dblclick)="openDialog(todoItem, group.id)">
           <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px"
             fxLayoutGap.xs="0">
             <div class="todoItem-info" fxFlex="95%">
-              <mat-checkbox class="checklist-leaf-node" [(ngModel)]="todoItem.completed" [ngClass]="{'completed': todoItem.completed}" > {{todoItem.item}} </mat-checkbox>
+              <mat-checkbox class="checklist-leaf-node" [(ngModel)]="todoItem.completed"
+                [ngClass]="{'completed': todoItem.completed}"> {{todoItem.item}} </mat-checkbox>
             </div>
             <div class="item item-2" fxFlex="5%" fxFlexOrder="3">
               <mat-icon aria-hidden="false" (click)="deleteItem(group.id, todoItem.id)">clear</mat-icon>
@@ -42,13 +40,15 @@
         <!-- /to do items -->
 
         <!-- add todo -->
-        <div fxLayout fxLayout.xs="column" fxLayoutAlign="enter" fxLayoutGap="0px"  fxLayoutGap.xs="0">
-          <div  fxFlex="25%">
-            <button mat-flat-button color="accent" style="width: 100%;" (click)="addTodoItem(group.id, $event)"> <mat-icon aria-hidden="false">add</mat-icon> </button>
+        <div fxLayout fxLayout.xs="column" fxLayoutAlign="enter" fxLayoutGap="0px" fxLayoutGap.xs="0">
+          <div fxFlex="25%">
+            <button mat-flat-button color="accent" style="width: 100%;" (click)="addTodoItem(group.id, $event)">
+              <mat-icon aria-hidden="false">add</mat-icon>
+            </button>
           </div>
           <div fxFlex="75%">
-            <input id="newItem-{{group.id}}" class="newTodoItem" autofocus     
-            placeholder="Enter a title for this card" (keyup.enter)="addTodoItem(group.id, $event)" style="height:85%;width:100%"> 
+            <input id="newItem-{{group.id}}" class="newTodoItem" autofocus placeholder="Enter a title for this card"
+              (keyup.enter)="addTodoItem(group.id, $event)" style="height:85%;width:100%">
           </div>
         </div>
         <!-- /add todo -->
@@ -56,20 +56,20 @@
     </div>
 
     <div class="single-group-container-add">
-      <div fxLayout fxLayout.xs="column" fxLayoutAlign="enter" fxLayoutGap="0px"  fxLayoutGap.xs="0">
-        <div  fxFlex="30%">        
-            <button mat-flat-button color="accent" (click)="addList()"> <mat-icon aria-hidden="false">add</mat-icon>  List</button>  
+      <div  flex fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex="20%">
+          <button mat-flat-button color="accent" (click)="addList()">
+            <mat-icon aria-hidden="false">add</mat-icon> List
+          </button>
         </div>
-        <div fxFlex="70%">
-          <input  id="newListItem" autofocus     
-          placeholder="Enter a title for this list" (keyup.enter)="addList()" style="height:85%;width:100%"> 
+        <div fxFlex="80%">
+          <input id="newListItem" autofocus placeholder="Enter a title for this list" (keyup.enter)="addList()">         
         </div>
       </div>
-      
 
-    
-  </div>
+
+
+    </div>
 
   </div>
 </div>
-

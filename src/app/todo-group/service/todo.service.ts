@@ -170,4 +170,10 @@ export class TodoService {
     let todoItemIndex = group.todos.findIndex( x => x.id == item.id );  
     group.todos[todoItemIndex] = item;
   }
+
+
+  getGroupCount():number
+  {
+      return this.todoGroup.length;
+  }
 }

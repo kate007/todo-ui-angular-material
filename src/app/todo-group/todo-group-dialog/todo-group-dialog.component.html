@@ -1,29 +1,35 @@
+<div flex fxLayout="column" fxLayoutGap.xs="10px">
+  <div fxFlex="100%">
+    <div flex fxLayout="row" fxLayout.xs="column"  *ngIf="!showDeleteConfirmMsg">
+      <div fxFlex="90">
+        <h1 mat-dialog-title>List Settings</h1>
+      </div>
+      <div fxFlex>
+        <button mat-flat-button color="warn" (click)="deleteConfirmed()">Delete This List</button>
+      </div>
+    </div>
+  </div>
 
 
-<div class="container">
-  <h2 mat-dialog-title *ngIf="!showDeleteConfirmMsg">
-      <mat-label>List</mat-label>
-      <mat-form-field class="example-full-width">            
-          <input matInput  [(ngModel)]="data.name">
-        </mat-form-field> 
-  </h2>
+  <div fxFlex="100%">
+    <div mat-dialog-content>
+      <p *ngIf="showDeleteConfirmMsg"> Are you sure you want to delete this list and all it's contents?</p>
+      <mat-form-field *ngIf="!showDeleteConfirmMsg" class="full-width">
+        <mat-label>List Name</mat-label>
+        <input matInput [(ngModel)]="data.name">
+      </mat-form-field>
+    </div>
+  </div>
 
-  <mat-dialog-content>
+  <div fxFlex="100%">
+    <div mat-dialog-actions *ngIf="showDeleteConfirmMsg">
+      <button mat-raised-button (click)="deleteCancelled()">No</button>
+      <button mat-raised-button color="warn" (click)="delete()">Yes, delete this list and all it's contents.</button>
+    </div>
+    <div mat-dialog-actions *ngIf="!showDeleteConfirmMsg">
+      <button mat-raised-button (click)="close()">Close</button>
+    </div>
+  </div>
 
- <mat-dialog-actions *ngIf="showDeleteConfirmMsg">
-  <p> Are you sure you want to delete this list and all it's contents?</p>
-  <button class="mat-raised-button" (click)="delete()" >Yes</button> <button class="mat-raised-button"  (click)="deleteCnacelled()">No</button>
- </mat-dialog-actions>
-
- <mat-dialog-actions *ngIf="!showDeleteConfirmMsg">
-  <button class="mat-raised-button" (click)="close()">Close</button>
-  <button class="mat-raised-button" (click)="deleteConfirmed()">Delete This List</button>
-</mat-dialog-actions>
-
-
-</mat-dialog-content>
-
-
-  
 
 </div>

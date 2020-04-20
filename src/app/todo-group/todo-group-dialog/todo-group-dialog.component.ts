@@ -27,7 +27,7 @@ export class TodoGroupDialogComponent implements OnInit {
 
    //this.todoService.deleteList(this.data.id); 
   }
-  deleteCnacelled(){
+  deleteCancelled(){
     this.showDeleteConfirmMsg = false;
   }
   delete() { 
